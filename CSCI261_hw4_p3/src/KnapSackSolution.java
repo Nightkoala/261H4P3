@@ -4,7 +4,7 @@
  * @author	Derek Brown <djb3718@rit.edu>
  *
  * Purpose	Reconstruct the answer to the knapsack problem and return the
- * 			results.
+ * 		results.
  */
 
 import java.util.Scanner;
@@ -49,16 +49,21 @@ public class KnapSackSolution {
 	 * The algorithm for finding the greatest cost of items that can fit in 
 	 * the knapsack, DOES NOT RECONSTRUCT SOLUTIONS.
 	 * 
-	 * @param K	Object containing all usefull information needed to solve 
-	 * 			problem, including, the number of items, the size of the 
-	 * 			knapsack, the costs of each item, and the weight of each item.
+	 * @param K	Object containing all usefull information needed to
+	 * 		solve problem, including, the number of items, the
+	 *		size of the knapsack, the costs of each item, and the
+	 *		weight of each item.
 	 */
 	public void knapSackSolver( KnapSackSolution K ) {
 		for( int v = 1 ; v <= K.weight ; v++ ) {
 			for( int k = 1 ; k <= K.size ; k++ ) {
 				S[k][v] = S[k-1][v];
-				if( ( K.weights[k-1] <= v ) && ( K.S[k-1][v-K.weights[k-1]] + K.costs[k-1] > K.S[k][v] ) ) {
-					K.S[k][v] = K.S[k-1][v-K.weights[k-1]] + K.costs[k-1];
+				if( ( K.weights[k-1] <= v ) &&
+				( K.S[k-1][v-K.weights[k-1]] + K.costs[k-1] >
+				K.S[k][v] ) ) {
+					K.S[k][v] =
+					K.S[k-1][v-K.weights[k-1]] +
+					K.costs[k-1];
 				}//end if
 			}//end for k
 		}//end for v
@@ -68,9 +73,10 @@ public class KnapSackSolution {
 	 * Algorithm for reconstructing the solution, Can only be run after
 	 * knapSackSolver has been run.
 	 * 
-	 * @param K	Object containing all useful information needed to solve the
-	 * 			problem, including, the number of items, the size of the 
-	 * 			knapsack, the costs of each item, and the weight of each item.
+	 * @param K	Object containing all useful information needed to
+	 *		solve the problem, including, the number of items, the
+	 *		size of the knapsack, the costs of each item, and the
+	 *		weight of each item.
 	 * 
 	 * @return	An array of numbers associated to the item number.
 	 */
@@ -120,7 +126,8 @@ public class KnapSackSolution {
 			costs[i] = iCost;
 		}//end for
 		sc.close();
-		KnapSackSolution K = new KnapSackSolution( numItems, costs, weights, KSweight );
+		KnapSackSolution K =
+		new KnapSackSolution( numItems, costs, weights, KSweight );
 		K.knapSackSolver( K );
 		int[] solution = K.knapSackSolution( K );
 		for( int item : solution ) {
